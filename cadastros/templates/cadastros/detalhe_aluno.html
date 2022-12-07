@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <h1>Detalhe do aluno:</h1>
+
+    <p>Nome: {{ aluno.nome }}</p>
+    <p>Curso: {{ aluno.curso|default_if_none:'-' }}</p>
+    <p>Período: {{ aluno.periodo }}</p>
+    <p>Horas Disponíveis: {{ aluno.horas_disponiveis }}</p>
+    <div>
+        <a class="btn btn-danger" href="{% url 'aluno-remove' aluno.id %}">Apagar registro</a>
+        <a class="btn btn-info" href="{% url 'aluno-edit' aluno.id %}">Atualizar registro</a>
+    </div>
+{% endblock %}
