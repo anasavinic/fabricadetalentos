@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+    <a class="btn btn-primary" href="{% url 'aluno-list' %}">
+        <span class="glyphicon glyphicon-list-alt"></span> Ver Alunos</a>
     <h1>Novo Aluno:</h1>
 
     <form action="{% url 'aluno-create' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Salvar" class="btn btn-primary">
+    <p></p>
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Salvar" class="btn btn-primary">
+        </div>
     </form>
 
 {% endblock %}

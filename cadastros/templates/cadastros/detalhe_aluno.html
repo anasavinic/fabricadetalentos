@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+    <a class="btn btn-primary" href="{% url 'aluno-list' %}">
+        <span class="glyphicon glyphicon-list-alt"></span> Ver Alunos</a>
     <h1>Detalhe do aluno:</h1>
 
     <p>Nome: {{ aluno.nome }}</p>

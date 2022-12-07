@@ -25,68 +25,59 @@ class AlunoList(View):
         pass
 
 
-class AlunoDetail(View):
+def aluno_detail(request, id):
 
-    def aluno_detail(request, id):
-        aluno = get_object_or_404(Aluno, pk=id)
-
-        context = {
-            'aluno': aluno,
-        }
-
-        return render(request, 'cadastros/detalhe_aluno.html', context)
+    aluno = get_object_or_404(Aluno, pk=id)
 
 
-class AlunoCreate(View):
+    context = {
+        'aluno': aluno,
+    }
 
-    def aluno_create(request):
-
-        if request.method == 'POST':
-
-            form = AlunoForm(request.POST)
-
-            if form.is_valid():
-                form.save()
-
-                return redirect('aluno-list')
-
-        else:
-            form = AlunoForm()
-
-        context = {
-            'form': form
-        }
-
-        return render(request, 'cadastros/cadastro_aluno.html', context)
+    return render(request, 'cadastros/detalhe_aluno.html', context)
 
 
-class AlunoRemove(View):
+def aluno_create(request):
 
-    def aluno_remove(request, id):
-        aluno = get_object_or_404(Aluno, pk=id)
+    if request.method == 'POST':
+        form = AlunoForm(request.POST)
 
-        aluno.delete()
-        messages.success('Registro removido com sucesso!')
+        if form.is_valid():
+            form.save()
+            return redirect('aluno-list')
+    else:
+        form = AlunoForm()
 
-        return redirect('aluno-list')
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'cadastros/cadastro_aluno.html', context)
 
 
-class AlunoEdit(View):
+def aluno_remove(request, id):
 
-    def aluno_edit(request, id):
+    aluno = get_object_or_404(Aluno, pk=id)
 
-        aluno_obj = get_object_or_404(Aluno, pk=id)
-        form = AlunoForm(request.POST or None, instance=aluno_obj)
+    aluno.delete()
 
-        if request.method == 'POST':
-            form = AlunoForm(request.POST, instance=aluno_obj)
-            if form.is_valid():
-                form.save()
-                return redirect('aluno-list')
+    return redirect('aluno-list')
 
-        context = {
-            'form': form,
-            'obj': aluno_obj
-        }
 
-        return render(request, 'cadastros/edita_aluno.html', context)
+def aluno_edit(request, id):
+
+    aluno = get_object_or_404(Aluno, pk=id)
+    form = AlunoForm(request.POST or None)
+
+    if request.method == 'POST':
+        form = AlunoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('aluno-list')
+
+    context = {
+        'form': form,
+        'obj': aluno
+    }
+
+    return render(request, 'cadastros/edita_aluno.html', context)

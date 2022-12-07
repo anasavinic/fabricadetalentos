@@ -8,5 +8,3 @@ class AlunoForm(forms.Form):
         model = Aluno
         fields = '__all__'
 
-    # def clean(self):
-    #     nome = self.cleaned_data['nome']

@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
+    <a class="btn btn-primary" href="{% url 'aluno-list' %}">
+        <span class="glyphicon glyphicon-list-alt"></span> Ver Alunos</a>
     <h1>Editar Aluno:</h1>
 
     <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Atualizar" class="btn btn-primary">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Salvar" class="btn btn-primary">
+        </div>
     </form>
 
 {% endblock %}
